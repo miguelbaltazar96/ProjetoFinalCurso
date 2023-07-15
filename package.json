@@ -1,0 +1,131 @@
+{
+  "name": "panoramix",
+  "displayName": "Panoramix",
+  "description": "Why3 for VScode",
+  "version": "0.0.1",
+  "publisher": "projetowhy3",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "Panoramix",
+        "properties": {
+          "why3.path": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null,
+            "description": "Specifies the path of the why3 binary."
+          }
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "why3.start",
+        "title": "Start proofing session"
+      },
+      {
+        "command": "why3.stop",
+        "title": "Stop proofing session"
+      },
+      {
+        "command": "why3.save",
+        "title": "Save proofing session"
+      },
+      {
+        "command": "why3.getTask",
+        "title": "Get task for selected node"
+      },
+      {
+        "command": "why3.command",
+        "title": "Execute command"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "why3",
+          "title": "Why3",
+          "icon": "media/logo_why3.png"
+        }
+      ]
+    },
+    "views": {
+      "why3": [
+        {
+          "id": "proof-tree",
+          "name": "Proof Tree",
+          "when": "resourceLangId == 'whyml'"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "whyml",
+        "aliases": [
+          "WhyML",
+          "whyml",
+          "why"
+        ],
+        "extensions": [
+          ".mlw",
+          ".why"
+        ],
+        "configuration": "./src/language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "whyml",
+        "scopeName": "source.whyml",
+        "path": "./src/syntaxes/whyml.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/cron": "^2.0.1",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/request-promise": "^4.1.44",
+    "@types/vscode": "^1.76.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "@vscode/test-electron": "^2.2.3",
+    "child_process": "1.0.2",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "node-rest-client": "^3.1.0",
+    "request": "^2.88.2",
+    "request-promise-native": "^0.0.0",
+    "rest": "2.0.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@types/request-promise": "^4.1.44",
+    "axios": "^1.4.0",
+    "cron": "^2.3.0",
+    "os": "^0.1.2",
+    "request-promise": "^0.0.1"
+  }
+}
