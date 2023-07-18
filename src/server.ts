@@ -36,7 +36,7 @@ export function stop() {
 }
 
 export function notificationsDaemon(nodeProvider: NodeProvider) {
-  if (process === undefined) {
+  if (process=== undefined) {
     //console.log("Starting notifications daemon:" + process);
     //let job = new cron.CronJob('* * * * * *', function () {
     processNotifications(nodeProvider);

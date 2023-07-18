@@ -27,40 +27,18 @@ export async function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('why3.start', commands.sessionStart, nodeProvider),
 		vscode.commands.registerCommand('why3.stop', commands.sessionStop),
 		vscode.commands.registerCommand('why3.save', commands.sessionSave),
+		vscode.commands.registerCommand('why3.getTask', commands.getTaskForNode, nodeProvider),
 
 		/* task provider */
 		vscode.workspace.registerTextDocumentContentProvider(TaskProvider.taskScheme, taskProvider),
 		/* tree provider */
 
-		vscode.window.registerTreeDataProvider('proof-tree', nodeProvider),
-		vscode.commands.registerCommand('why3.getTask', commands.getTaskForNode, nodeProvider),
+		vscode.window.registerTreeDataProvider('proof-tree', nodeProvider)
 	];
 
 	disposable.forEach(d => {
 		context.subscriptions.push(d);
 	});
-
-	//context.subscriptions.push(vscode.window.createTreeView('proof-tree', {treeDataProvider: nodeProvider}));
-
-	/*context.subscriptions.push(vscode.window.registerTreeDataProvider('proof-tree', nodeProvider));
-	context.subscriptions.push(vscode.workspace.registerTextDocumentContentProvider(TaskProvider.taskScheme, taskProvider));*/
-
-	//context.subscriptions.push(vscode.window.registerTreeDataProvider('proof-tree',nodeProvider));
-
-
-	/*let result = await webReq.sendWebRequest(webReq.scripts.request, webReq.requests.getTask, 3);
-
-	let task;
-	for (let i = 0; i < result.length; i++) {
-		if (result[i].task !== undefined) {
-			task = result[i].task;
-			break;
-		}
-	}
-	let uri = vscode.Uri.parse(TaskProvider.taskScheme + ":Task?" + task);
-	let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
-	vscode.languages.setTextDocumentLanguage(doc, 'whyml');
-	await vscode.window.showTextDocument(doc, { preserveFocus: true, preview: false, viewColumn: vscode.ViewColumn.Beside });*/
 }
 
 // this method is called when your extension is deactivated

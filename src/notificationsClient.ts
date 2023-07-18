@@ -66,13 +66,6 @@ export async function processNotifications(nodeProvider: NodeProvider): Promise<
     notifications.forEach(async (n: Notification.RootObject) => {
         switch (n.notification) {
             case "New_node":
-                console.log("New node");
-                console.log("parent->" + n.parent_ID);
-                console.log("node->" + n.node_ID);
-                console.log("name->" + n.name);
-                console.log("type->" + n.node_type);
-                console.log("detached->" + n.detached);
-
                 if ((n.node_ID !== undefined) && (n.parent_ID !== undefined) && (n.detached !== undefined)) {
                     Tree.setNode({
                         id: n.node_ID,

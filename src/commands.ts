@@ -4,7 +4,6 @@ import { NodeProvider } from './nodeProvider';
 import * as TaskProvider from './taskProvider';
 import * as webReq from './webRequests';
 import * as basicInput from './basicInput';
-import { mkdir } from 'fs';
 import * as notifca from './notificationsClient';
 
 export async function transformation() {
@@ -49,8 +48,8 @@ export async function getTaskForNode(id: number){
 }
 
 export async function commands(id: number){
-    //let commandName = basicInput.commandPick();
-    //let commandId = basicInput.subCommandPick(commandName);
+    let commandName = basicInput.commandPick();
+    //let commandId = basicInput.subCommandPick();
     webReq.sendWebRequest(webReq.Scripts.request, webReq.Requests.command, id,{id:0,command:webReq.Commands.listProvers});
 
     /*let task;
